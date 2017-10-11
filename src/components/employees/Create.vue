@@ -1,11 +1,14 @@
 <template>
 <div class="row">
 <div>
-            <router-link to="/Employees">Employees</router-link>
-            <router-link to="/employees/create">Add New</router-link>
+            <router-link to="/admin/employees">Employees</router-link>
+            <router-link to="/admin/employees/create">Add New</router-link>
         </div>
     <form @submit.prevent="submit" class="offset-s3 col s6"> 
         <div class="row">
+            <div v-if="error" class="col s12">
+                error
+            </div>
             <div class="input-field col s12">
                <input type="text" id="first_name" name="first_name" v-model="first_name" v-validate:first_name="'required'" :class="{'input': true, 'invalid': errors.has('first_name') }" />
                 <label for="first_name" v-bind:data-error="errors.first('first_name')">
@@ -50,7 +53,7 @@
                 </label>
             </div>          
             <div class="col s12">
-                <input type="checkbox" id="apply_incentives" name="apply_incentives" v-model="apply_incentives" v-validate:apply_incentives="'required'" :class="{'invalid': errors.has('apply_incentives') }">
+                <input type="checkbox" id="apply_incentives" name="apply_incentives" v-model="apply_incentives" :class="{'invalid': errors.has('apply_incentives') }">
                 <label for="apply_incentives" v-bind:data-error="errors.first('apply_incentives')">
                 <i v-show="errors.has('apply_incentives')" class="fa fa-warning"></i>
                     Apply Incentives
@@ -74,6 +77,8 @@
         data() {
             return {
                 errMsg:  '',
+                error: false,
+
                 errLogin: false,
                 isLogin: false,
                 // We need to initialize the component with any
