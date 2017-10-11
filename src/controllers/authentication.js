@@ -1,10 +1,13 @@
+// Import classes to use in methods
+// Base class connection
 import {HTTP} from '../common_class/http.js';
+// Use router 
 import {router} from '../router/index.js'
-const API_URL = 'https://insense-api.herokuapp.com/api/v1/'
+// Define URL to authenticate
 const LOGIN_URL = 'users/login'
-const SIGNUP_URL = API_URL + 'users/'
 
 export default {
+  /*
     getCoin(context){
         HTTP.get('/v1/ticker/' + context.$route.params.id+'/')
             .then((resp) => {
@@ -25,10 +28,16 @@ export default {
               console.log(err)
             })
     },
+    */
+    // Create method to authenticate Users
+    /*
+      Use the context to redirect after succeded login
+      params: {email: 'jdoe@foo.com', password: '123456'}
+    */
     authenticate(context, params){
         HTTP.post(LOGIN_URL, params )
             .then((resp) => {
-                console.log(resp);
+                // Use localStorage to save access token, to use in each request
                 localStorage.setItem('access_token', resp.data.token)
                 context.$router.push('admin')  
             })

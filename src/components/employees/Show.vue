@@ -44,12 +44,7 @@
 
         methods: {
             fetchData() {
-                var object_data = {
-                    headers: {
-                        'x-access-token': localStorage.access_token
-                    }
-                };
-                employees.show(this, object_data)
+                employees.show(this)
             }
         }
 

@@ -88,8 +88,6 @@
         </div>
         <div v-show="showModal"  @click="showModal = false, fetchData()" class="modal-overlay" style="z-index: 1002; display: block; opacity: 0.5;"></div>
     </div>
-
-
 </template>
 
 <script>
@@ -125,25 +123,15 @@
 
         methods: {
             fetchData() {
-                var object_data = {
-                    headers: {
-                        'x-access-token': localStorage.access_token
-                    }
-                };
-                employees.index(this, object_data)
+                employees.index(this)
             },
             retrieveData(id) {
-                var object_data = {
-                    headers: {
-                        'x-access-token': localStorage.access_token
-                    }
-                };
-                employees.retrieve(this, object_data, id)
+                employees.retrieve(this, id)
             },
             update() {
                 this.$validator.validateAll().then(success => {
                     if (success) {
-                        var object_data = {
+                        var employees = {
                             first_name: this.first_name,
                             last_name: this.last_name,
                             position: this.position,
@@ -157,7 +145,7 @@
                             status: true,
                             position: 'sdfasgfsd'
                         }
-                        employees.update(this, object_data, this.id)
+                        employees.update(this, employees, this.id)
                     }
                     else{
                         alert('ERROR')
