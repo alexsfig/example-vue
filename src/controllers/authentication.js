@@ -39,7 +39,14 @@ export default {
             .then((resp) => {
                 // Use localStorage to save access token, to use in each request
                 localStorage.setItem('access_token', resp.data.token)
-                context.$router.push('admin')  
+                let param = unescape(location.search.split('redirect=')[1])
+                if (param !== null) {
+                  context.$router.push(param)  
+
+                }else{
+                  context.$router.push('admin')  
+                  
+                }
             })
             .catch((err) => {
               console.log(err)

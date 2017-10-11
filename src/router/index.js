@@ -53,6 +53,7 @@ export default new Router({
     {
       path: '/admin',
       component: AdminTemplate,
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'employees/create',
@@ -73,3 +74,4 @@ export default new Router({
     },
   ]
 })
+

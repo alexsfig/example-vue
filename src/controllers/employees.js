@@ -28,11 +28,7 @@ export default {
         Method to create employees, pass object Employee
     */
     create(context, employee){
-        HTTP.post(EMPLOYEE, employee, {
-                    headers: {
-                        'x-access-token': localStorage.access_token
-                    }
-                })
+        HTTP.post(EMPLOYEE)
             .then((resp) => {
                 if (resp.status>= 200 && resp.status <=300){
                     console.log(resp)
