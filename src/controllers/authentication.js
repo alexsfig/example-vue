@@ -30,7 +30,7 @@ export default {
             .then((resp) => {
                 console.log(resp);
                 localStorage.setItem('access_token', resp.data.token)
-                context.$router.push('about')  
+                context.$router.push('admin')  
             })
             .catch((err) => {
               console.log(err)
