@@ -10,7 +10,7 @@
                     </label>
                  </div>
                 <div class="input-field col s12">
-                    <input name="password" v-model="password" v-validate="'required|min:8'" :class="{'input': true, 'invalid': errors.has('password') }" type="password" placeholder="Pasword">
+                    <input name="password" v-model="password" v-validate="'required|min:6'" :class="{'input': true, 'invalid': errors.has('password') }" type="password" placeholder="Pasword">
                      <label for="password" v-bind:data-error="errors.first('password')">
                         <i v-show="errors.has('password')" class="fa fa-warning"></i>
                         Password
@@ -27,25 +27,29 @@
 </template>
 
 <script>
+import auth from '../controllers/authentication.js'
 export default {
   name: 'form-example',
   data: () => ({
     email: '',
-    name: '',
-    phone: '',
-    url: '',
     password: ''
   }),
   methods: {
     validateBeforeSubmit() {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          // eslint-disable-next-line
-          alert('From Submitted!');
-          return;
+            var credentials = {
+                email:      this.email,
+                password:   this.password
+            }
+          auth.authenticate(this, credentials )
+          
+        }
+        else{
+            alert('Correct them errors!');
+            
         }
 
-        alert('Correct them errors!');
       });
     }
   }

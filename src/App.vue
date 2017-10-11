@@ -8,7 +8,7 @@
     <router-link to="/coins/bitcoin">BitCoin</router-link>
     <router-link to="/coins">Coins</router-link>
     <router-view/>
-  </div>
+  </div>  
 </template>
 
 <script>
