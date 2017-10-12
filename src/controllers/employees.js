@@ -99,16 +99,17 @@ export default {
     retrieve(context, id){
         HTTP.get(EMPLOYEE + id)
             .then((resp) => {
-                context.id  = resp.data.id ,
-                context.first_name = resp.data.first_name,
-                context.last_name = resp.data.last_name,
-                context.ssn = resp.data.ssn,
-                context.email = resp.data.email,
-                context.phone_number = resp.data.phone_number,
-                context.birth_date = resp.data.birth_date,
-                context.apply_incentives = resp.data.apply_incentives,
-                context.profile_picture = resp.data.profile_picture,
-                context.employee = resp.data
+                context.employeesParams = resp.data;
+                context.id  = resp.data.id ;
+                context.first_name = resp.data.first_name;
+                context.last_name = resp.data.last_name;
+                context.ssn = resp.data.ssn;
+                context.email = resp.data.email;
+                context.phone_number = resp.data.phone_number;
+                context.birth_date = resp.data.birth_date;
+                context.apply_incentives = resp.data.apply_incentives;
+                context.profile_picture = resp.data.profile_picture;
+                context.employee = resp.data;
             })
             .catch((err) => {
               console.log(err)

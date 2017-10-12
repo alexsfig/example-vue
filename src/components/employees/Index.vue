@@ -4,23 +4,29 @@
             <router-link to="/admin/employees">Employees</router-link>
             <router-link to="/admin/employees/create">Add New</router-link>
         </div>
-        <div class="col m3" v-for="employee in employees">
-            <br>
-            <div>
-                <p>Name: {{ employee.first_name }} {{ employee.last_name }}</p>
-                <p>Birth Date: {{ employee.birth_date | formatDate}}</p>
-                <p>Email: {{ employee.email }}</p>
-                <button class="waves-effect waves-light btn modal-trigger" @click="showModal = true, retrieveData(employee.id)">Edit</button>
-                <p>View: <router-link :to="{ name: 'EmployeesShow', params: { id: employee.id }}">view</router-link></p>
+        <div class="row">
+            
+            <div class="col m3" v-for="employee in employees">
+                <br>
+                <div>
+                    <p>Name: {{ employee.first_name }} {{ employee.last_name }}</p>
+                    <p>Birth Date: {{ employee.birth_date | formatDate}}</p>
+                    <p>Email: {{ employee.email }}</p>
+                    <button class="waves-effect waves-light btn modal-trigger" @click="showModal = true, retrieveData(employee.id)">Edit</button>
+                    <p>View: <router-link :to="{ name: 'EmployeesShow', params: { id: employee.id }}">view</router-link></p>
+                </div>
             </div>
+            <div class="row">
         </div>
-        
+            
+            
+        </div>
 
         <!-- Modal Structure -->
         <div v-show="showModal" id="modal1" class="modal open modal-fixed-footer"   style="z-index: 1003; display: block; opacity: 1; transform: scaleX(1); top: 10%;">
             <div class="modal-content">
               <h5>Edit employee</h5>
-                <form @submit.prevent="update" class="offset-s2 col s8"> 
+                <form @submit.prevent="updateEmployee" class="offset-s2 col s8"> 
                     <div class="row">
                         <input value="  " type="hidden" v-model="id">
                         <div class="input-field col s6">
@@ -87,6 +93,7 @@
             </div>
         </div>
         <div v-show="showModal"  @click="showModal = false, fetchData()" class="modal-overlay" style="z-index: 1002; display: block; opacity: 0.5;"></div>
+
     </div>
 </template>
 
@@ -128,10 +135,10 @@
             retrieveData(id) {
                 employees.retrieve(this, id)
             },
-            update() {
+            updateEmployee() {
                 this.$validator.validateAll().then(success => {
                     if (success) {
-                        var employees = {
+                        var employeesParams = {
                             first_name: this.first_name,
                             last_name: this.last_name,
                             position: this.position,
@@ -145,7 +152,7 @@
                             status: true,
                             position: 'sdfasgfsd'
                         }
-                        employees.update(this, employees, this.id)
+                        employees.update(this, employeesParams, this.id)
                     }
                     else{
                         alert('ERROR')
