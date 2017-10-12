@@ -40,7 +40,7 @@ export default {
                 // Use localStorage to save access token, to use in each request
                 localStorage.setItem('access_token', resp.data.token)
                 let param = unescape(location.search.split('redirect=')[1])
-                if (param !== null) {
+                if (param !== "undefined") {
                   context.$router.push(param)  
 
                 }else{
